@@ -5,7 +5,7 @@ public class CardDeck extends CardList
   private Random random=new Random();
   private int suits=4;
   private int ranks=13;
-  private int swaps=10000;
+  private int swaps=100000;
   public CardDeck()
   {
     super();
