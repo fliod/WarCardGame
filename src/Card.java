@@ -9,6 +9,10 @@ public class Card extends PlayingCard
   {
     String soot69;
     String ranke420;
+    if(super.getRank()==10)
+    {
+      ranke420="T";
+    }
     if(super.getRank()==11)
     {
       ranke420="J";
@@ -24,6 +28,10 @@ public class Card extends PlayingCard
     else if(super.getRank()==1)
     {
       ranke420="A";
+    }
+    else if(super.getRank()==10)
+    {
+      ranke420="T";
     }
     else
     {
@@ -53,8 +61,7 @@ public class Card extends PlayingCard
   }
   public int compareTo(Card other)
   {
-    return this.getRank()-other.getRank();
+    return (this.getRank())-(other.getRank());
   }
 }
-
 
