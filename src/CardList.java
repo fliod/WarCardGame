@@ -1,20 +1,12 @@
 // create class CardList
-// create class CardList
 import java.util.*;
 public class CardList
 {
   private Random random=new Random();
-  private ArrayList<Card> cards=new ArrayList<Card>(52);
+  private ArrayList<Card> cards;
   public CardList()
   {
-    for(int i=1;i<=4;i++)
-    {
-      for(int x=1;x<=26;x++)
-      {
-        Card tempCard=new Card(i,x);
-        cards.add(tempCard);
-      }
-    }
+    cards=new ArrayList<Card>();
   }
   public int size()
   {
@@ -28,7 +20,7 @@ public class CardList
   {
     cards.add(0,card);
   }
-  public Card takeCardFromTop(Card card)
+  public Card takeCardFromTop()
   {
     Card temp=cards.get(0);
     cards.remove(0);
@@ -42,6 +34,12 @@ public class CardList
     cards.remove(r);
     return temp;
   }
+  public Card get(int location)
+  {
+    return cards.get(location);
+  }
+  public Card seetop()
+  {
+    return cards.get(0);
+  }
 }
-  
-  
