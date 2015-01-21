@@ -3,7 +3,7 @@ public class War {
   
   public static void main(String[] args) {
     // create deck, hands and stacks
-    Scanner scan=new Scanner(System.in);
+    
     CardDeck deck=new CardDeck();
     deck.shuffle();
     CardList hand1=new CardList();
@@ -25,66 +25,33 @@ public class War {
       stack1.addCardToTop(hand1.takeCardFromTop());
       stack2.addCardToTop(hand2.takeCardFromTop());
       System.out.println(("    "+stack1.get(0)).toString()+" : "+(stack2.get(0)).toString());
-      while((stack1.get(0)).compareTo(stack2.get(0))==0)
-      {
-        if(hand1.size()>2 && hand2.size()>2)
+      int compare = stack1.get(0).compareTo(stack2.get(0));
+      while(compare == 0 && stack1.size()>1 && stack2.size()>1 )
         {
           System.out.println(hand1.size()+ " --- WAR --- "+hand2.size());
-          stack1.addCardToTop(hand1.takeCardFromTop());
-          stack2.addCardToTop(hand2.takeCardFromTop());
-          stack1.addCardToTop(hand1.takeCardFromTop());
-          stack2.addCardToTop(hand2.takeCardFromTop());
-          System.out.println("    "+stack1.get(0)+" : "+stack2.get(0));
-          if((stack1.get(0)).compareTo(stack2.get(0))>=1)
+          if(hand1.size()>1 && hand2.size()>1)
           {
-            for(int i=0;i<stack1.size();i++)
-            {
-              //when p1 wins then all cards are drained to bottom of his hand
-              hand1.addCardToBottom(stack1.takeCardFromTop());
-              hand1.addCardToBottom(stack2.takeCardFromTop());
-            }
-            break; 
-          }
-          else if((stack2.get(0)).compareTo(stack1.get(0))>=1)
-          {
-            for(int i=0;i<stack2.size();i++)
-            {
-              //same but when p2 wins
-              hand2.addCardToBottom(stack1.takeCardFromTop());
-              hand2.addCardToBottom(stack2.takeCardFromTop());
-            }
-            break;
-          }
-          else
-          {
+            stack1.addCardToTop(hand1.takeCardFromTop());
+            stack2.addCardToTop(hand2.takeCardFromTop());
+            System.out.println("    "+stack1.get(0)+" : "+stack2.get(0));
+            compare=stack1.get(0).compareTo(stack2.get(0));
           }
         }
-        else if(hand1.size()<=2)
-        {
-          System.out.println("Player B wins!");
-          break;
-        }
-        else if(hand2.size()<=2)
-        {
-          System.out.println("Player A wins!");
-          break;
-        }
-      }
-      //these check which card is bigger
-      if((stack1.get(0)).compareTo(stack2.get(0))>0)
+//these check which card is bigger
+      if(compare>0)
       {
-        int ss=stack1.size();
-        for(int i=0;i<ss;i++)
+        int ss1=stack1.size();
+        for(int i=0;i<ss1;i++)
         {
           //when p1 wins then all cards are drained to bottom of his hand
           hand1.addCardToBottom(stack1.takeCardFromTop());
           hand1.addCardToBottom(stack2.takeCardFromTop());
         }
       }
-      else if((stack2.get(0)).compareTo(stack1.get(0))>0)
+      else if(compare<0)
       {
-        int ss=stack2.size();
-        for(int i=0;i<ss;i++)
+        int ss2=stack2.size();
+        for(int i=0;i<ss2;i++)
         {
           //same but when p2 wins
           hand2.addCardToBottom(stack1.takeCardFromTop());
