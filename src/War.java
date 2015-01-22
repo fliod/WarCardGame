@@ -21,24 +21,60 @@ public class War {
     System.out.println("A --- player --- B");
     while(hand1.size()>0 && hand2.size()>0)
     {
-      hand1.shuffle();
-      hand2.shuffle();
       System.out.println(hand1.size()+" ---round"+" "+rounds+"---"+hand2.size());
       stack1.addCardToTop(hand1.takeCardFromTop());
       stack2.addCardToTop(hand2.takeCardFromTop());
       System.out.println(("    "+stack1.get(0)).toString()+" : "+(stack2.get(0)).toString());
       int compare = stack1.get(0).compareTo(stack2.get(0));
-      while(compare == 0 && stack1.size()>1 && stack2.size()>1 )
+      while(compare == 0)
+      {
+        if(hand1.size()>2 && hand2.size()>2)
         {
           System.out.println(hand1.size()+ " --- WAR --- "+hand2.size());
-          if(hand1.size()>1 && hand2.size()>1)
+          stack1.addCardToTop(hand1.takeCardFromTop());
+          stack2.addCardToTop(hand2.takeCardFromTop());
+          stack1.addCardToTop(hand1.takeCardFromTop());
+          stack2.addCardToTop(hand2.takeCardFromTop());
+          System.out.println("    "+stack1.get(0)+" : "+stack2.get(0));
+          compare=stack1.get(0).compareTo(stack2.get(0));
+          if(compare>0)
           {
-            stack1.addCardToTop(hand1.takeCardFromTop());
-            stack2.addCardToTop(hand2.takeCardFromTop());
-            System.out.println("    "+stack1.get(0)+" : "+stack2.get(0));
-            compare=stack1.get(0).compareTo(stack2.get(0));
+            int ss1=stack1.size();
+            for(int i=0;i<ss1;i++)
+            {
+              //this is different than normal stack-->hand method, it adds the stacks seperately
+              hand1.addCardToBottom(stack1.removeRandomCard());
+            }
+            for(int i=0;i<ss1;i++)
+            {
+              hand1.addCardToBottom(stack2.removeRandomCard());
+            }
+          }
+          else if(compare<0)
+          {
+            int ss2=stack2.size();
+            for(int i=0;i<ss2;i++)
+            {
+              //same but when p2 wins
+              hand2.addCardToBottom(stack1.removeRandomCard());
+            }
+            for(int i=0;i<ss2;i++)
+            {
+              hand2.addCardToBottom(stack2.removeRandomCard());
+            }
           }
         }
+        if(hand1.size()<=2)
+        {
+          System.out.println("------WINNER-------\nPlayer B wins!\n");
+          break;
+        }
+        if(hand2.size()<=2)
+        {
+          System.out.println("------WINNER-------\nPlayer A wins!\n");
+          break;
+        }
+      }
 //these check which card is bigger
       if(compare>0)
       {
