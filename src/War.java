@@ -21,6 +21,8 @@ public class War {
     System.out.println("A --- player --- B");
     while(hand1.size()>0 && hand2.size()>0)
     {
+      hand1.shuffle();
+      hand2.shuffle();
       System.out.println(hand1.size()+" ---round"+" "+rounds+"---"+hand2.size());
       stack1.addCardToTop(hand1.takeCardFromTop());
       stack2.addCardToTop(hand2.takeCardFromTop());
