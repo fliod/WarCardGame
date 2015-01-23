@@ -10,7 +10,7 @@ public class War {
     CardList hand2=new CardList();
     CardList stack1=new CardList();
     CardList stack2=new CardList();
-    
+    int x=1;
     int rounds=1;
     // deal the cards
     for(int i=0;i<26;i++)
@@ -64,15 +64,19 @@ public class War {
             }
           }
         }
-        if(hand1.size()<=2)
+        else if(hand1.size()<=2)
         {
-          System.out.println("------WINNER-------\nPlayer B wins!\n");
-          break;
+          for(int i=0;i<hand1.size();i++)
+          {
+            hand2.addCardToBottom(hand1.takeCardFromTop());
+          }
         }
-        if(hand2.size()<=2)
+        else if(hand2.size()<=2)
         {
-          System.out.println("------WINNER-------\nPlayer A wins!\n");
-          break;
+          for(int i=0;i<hand2.size();i++)
+          {
+            hand1.addCardToBottom(hand2.takeCardFromTop());
+          }
         }
       }
 //these check which card is bigger
@@ -97,12 +101,18 @@ public class War {
         }
       }
       rounds++;
+      x=rounds/1000;
+      if(rounds==1000*x)
+      {
+        hand1.shuffle();
+        hand2.shuffle();
+      }
     }
     if(hand1.size()>0)
     {
       System.out.println("------WINNER-------\nPlayer A wins!\n");
     }
-    else
+    else if(hand2.size()>0)
     {
       System.out.println("------WINNER-------\nPlayer B wins!\n");
     }
